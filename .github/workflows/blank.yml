@@ -13,6 +13,10 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+env:
+  MY_SECRET: ${{ secrets.MY_SECRET }}
+
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -30,4 +34,4 @@ jobs:
         run: echo Hello, world!
 
       - name: Echo secret
-        run: echo ${{ secrets.MY_SECRET }}
+        run: echo $MY_SECRET
