@@ -63,7 +63,7 @@ body:
       label: Expected behavior
       description: "A clear and concise description of what you would expect to happen."
 
- - type: checkboxes
+  - type: checkboxes
     id: terms
     attributes:
       label: Checklist
