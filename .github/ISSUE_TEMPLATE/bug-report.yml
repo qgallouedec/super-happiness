@@ -67,10 +67,6 @@ body:
     id: terms
     attributes:
       label: Checklist
-      description: |
-        Before submitting, please confirm that you've completed each of the following.
-        If an item doesn't apply to your issue, check it anyway to show you've reviewed it.
-
       options:
         - label: "I have checked that my issue isn't already filed (see [open issues](https://github.com/huggingface/trl/issues?q=is%3Aissue))"
           required: true
