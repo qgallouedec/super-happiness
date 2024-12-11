@@ -1,7 +1,7 @@
 name: Experiment
 on: 
   schedule:
-  - cron: '*/5 * * * *'
+  - cron: '*/15 * * * *'
 
 jobs:
   job1:
@@ -11,6 +11,6 @@ jobs:
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
-      with: { ref: debug }
+      with: { ref: main }
     - name: List files
       run: ls
