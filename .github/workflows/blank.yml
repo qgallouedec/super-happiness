@@ -8,7 +8,7 @@ on:
   push:
     branches: [ "v0.12-release" ]
   schedule:
-    - cron: '0,10,20,30,40,50 * * * *'  # Runs daily at midnight UTC
+    - cron: '*/6 * * * *'  # Runs daily at midnight UTC
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
