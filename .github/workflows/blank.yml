@@ -1,18 +1,10 @@
-name: Scheduled Daily Run
-
 on:
   schedule:
-    - cron: '*/6 * * * *' # Every day at midnight UTC
+    - cron: '13 16 * * *'
 
 jobs:
-  daily-run:
+  test_schedule:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Example step
-        run: echo "This runs every day at midnight on the specified branch"
-
-    # Ensure this job only runs on the desired branch
-    if: github.ref == 'refs/heads/v0.12-release'
+      - name: Every time
+        run: echo "This step will always run"
