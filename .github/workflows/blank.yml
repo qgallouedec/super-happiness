@@ -14,5 +14,3 @@ jobs:
       - name: Example step
         run: echo "This runs every day at midnight on the specified branch"
 
-    # Ensure this job only runs on the desired branch
-    if: github.ref == 'refs/heads/v0.12-release'
