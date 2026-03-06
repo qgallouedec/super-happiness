@@ -1,1 +1,1 @@
-from .trainers import GRPOTrainer, RLOOTrainer
+from .trainers import DAPOTrainer, GRPOTrainer, RLOOTrainer
