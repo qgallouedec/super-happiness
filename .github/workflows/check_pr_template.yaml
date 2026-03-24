@@ -48,11 +48,7 @@ jobs:
             }
 
             if (errors.length > 0) {
-              const comment = [
-                "This PR has been closed because it does not follow the [PR template](https://github.com/huggingface/trl/blob/main/.github/PULL_REQUEST_TEMPLATE.md):",
-                "",
-                ...errors,
-              ].join("\n");
+              const comment = "Your PR has been closed because it does not follow the required [PR template](https://github.com/huggingface/trl/blob/main/.github/PULL_REQUEST_TEMPLATE.md). Please open a new PR following the template. See [CONTRIBUTING.md](https://github.com/huggingface/trl/blob/main/CONTRIBUTING.md#submitting-a-pull-request-pr) for guidance.";
 
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
