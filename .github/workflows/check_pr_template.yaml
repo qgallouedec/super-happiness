@@ -6,6 +6,7 @@ on:
 
 permissions:
   pull-requests: write
+  issues: write
   statuses: write
 
 jobs:
@@ -48,62 +49,26 @@ jobs:
 
             if (errors.length > 0) {
               const comment = [
-                "### PR Template Check Failed",
-                "",
-                "Your PR does not follow the required [PR template](https://github.com/huggingface/trl/blob/main/.github/PULL_REQUEST_TEMPLATE.md). Please update your PR description to fix the following:",
+                "This PR has been closed because it does not follow the [PR template](https://github.com/huggingface/trl/blob/main/.github/PULL_REQUEST_TEMPLATE.md):",
                 "",
                 ...errors,
-                "",
-                "PRs that do not follow the template will not be reviewed. See [CONTRIBUTING.md](https://github.com/huggingface/trl/blob/main/CONTRIBUTING.md#submitting-a-pull-request-pr) for guidance.",
               ].join("\n");
 
-              // Post or update a comment
-              const { data: comments } = await github.rest.issues.listComments({
+              await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: context.payload.pull_request.number,
+                body: comment,
               });
 
-              const botComment = comments.find(
-                (c) => c.user.type === "Bot" && c.body.includes("PR Template Check Failed")
-              );
-
-              if (botComment) {
-                await github.rest.issues.updateComment({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  comment_id: botComment.id,
-                  body: comment,
-                });
-              } else {
-                await github.rest.issues.createComment({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  issue_number: context.payload.pull_request.number,
-                  body: comment,
-                });
-              }
+              await github.rest.pulls.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number,
+                state: "closed",
+              });
 
               core.setFailed("PR does not follow the required template.");
             } else {
-              // If a previous failure comment exists, remove it
-              const { data: comments } = await github.rest.issues.listComments({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.payload.pull_request.number,
-              });
-
-              const botComment = comments.find(
-                (c) => c.user.type === "Bot" && c.body.includes("PR Template Check Failed")
-              );
-
-              if (botComment) {
-                await github.rest.issues.deleteComment({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  comment_id: botComment.id,
-                });
-              }
-
               console.log("PR template check passed.");
             }
