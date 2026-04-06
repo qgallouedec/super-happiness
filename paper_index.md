@@ -2,7 +2,7 @@
 
 This file tracks the research papers implemented in this repository.
 
-## GRPO — Group Relative Policy Optimization
+## GRPO — Group-Relative Policy Optimization
 
 - **Paper**: [DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models](https://arxiv.org/abs/2402.03300)
 - **Trainer**: `trl/trainers/grpo_trainer.py`
