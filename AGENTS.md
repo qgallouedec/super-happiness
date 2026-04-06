@@ -86,3 +86,7 @@ def method(self, param1: str, param2: int = 1, param3: float | None = None):
     ```
     """
 ````
+
+### Pull Request title
+
+A good PR title is a clear, concise description of what changed and why, written in imperative form, and understandable on its own in `git log`. When you review a pull request, if the title isn't good, suggest a better one.
