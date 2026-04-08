@@ -199,39 +199,6 @@ class RLOOTrainer(_BaseTrainer):
         return per_token_logps, per_token_entropies
 
     # ---------------------------------------------------------------------------
-    # Reward computation
-    # ---------------------------------------------------------------------------
-
-    def _calculate_rewards(self, prompts, completions):
-        """
-        Compute rewards for each completion.
-
-        Each reward function is called with the full list of prompts and completions, and the
-        results are summed element-wise to produce a single reward per completion.
-
-        Args:
-            prompts (`list[str]`):
-                The prompt strings (repeated for each completion in the group).
-            completions (`list[str]`):
-                The completion strings.
-
-        Returns:
-            `list[float]`:
-                A list of scalar rewards, one per completion.
-        """
-        if not self.reward_functions:
-            return [0.0] * len(completions)
-
-        # Accumulate rewards from all reward functions
-        total_rewards = [0.0] * len(completions)
-        for reward_fn in self.reward_functions:
-            rewards = reward_fn(prompts, completions)
-            for i in range(len(completions)):
-                total_rewards[i] += rewards[i]
-
-        return total_rewards
-
-    # ---------------------------------------------------------------------------
     # Input preparation
     # ---------------------------------------------------------------------------
 
